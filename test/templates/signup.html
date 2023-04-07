@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        $(document).ready(function () {
+            $('#username').on('input', function () {
+                let usernameLength = $('#username').val().length;
+                let usernameMessage = $('#username-message');
+
+                if (usernameLength > 8) {
+                    usernameMessage.html('아이디 양식에 적합니다.').css('color', 'green');
+                } else if(usernameLength == 0){
+                    usernameMessage.html('');
+                } else {
+                    usernameMessage.html('아이디가 너무 짧습니다.').css('color', 'red');
+                }
+            });
+
+            $('#userpassword2').on('input', function () {
+                let userpassword = $('#userpassword').val();
+                let userpassword2 = $('#userpassword2').val();
+                let usernameMessage = $('#userpassword-message');
+
+                if (userpassword == userpassword2) {
+                    usernameMessage.html('비밀번호가 일치합니다.').css('color', 'green');
+                } else if(userpassword2 == "") {
+                    usernameMessage.html('');
+                } else{
+                    usernameMessage.html('비밀번호가 일치하지 않습니다.').css('color', 'red');
+                }
+
+            });
+
+            $('#usernickname').on('input', function () {
+                let usernickname = $('#usernickname').val().length;
+                let usernicknameMessage = $('#usernickname-message');
+
+                if (usernickname > 1) {
+                    usernicknameMessage.html('닉네임 양식에 적합합니다.').css('color', 'green');
+                } else if(usernickname == 0 ){
+                    usernicknameMessage.html('');
+                } else{
+                    usernicknameMessage.html('두 글자 이상 입력해주세요').css('color', 'red');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="bg-gray-300 w-[400px] overflow-hidden mx-auto mt-36 px-[20px] pt-5 rounded-lg">
+        <h1 class="text-center text-4xl font-bold mb-[20px]">Sign Up</h1>
+        <div>
+            <p class="text-2xl mb-[10px] font-bold">ID</p>
+            <input type="text" id="username" class="h-10 w-[360px] rounded indent-3" placeholder="아이디를 입력해주세요.">
+            <div id="username-message" class="mb-[20px]"></div>
+            <p class="text-2xl mb-[10px] font-bold">PW</p>
+            <input type="password" id="userpassword" class="h-10 w-[360px] rounded mb-[20px] indent-3" placeholder="비밀번호를 입력해주세요.">
+            <p class="text-2xl mb-[10px] font-bold">PW Check</p>
+            <input type="password" id="userpassword2" class="h-10 w-[360px] rounded indent-3" placeholder="비밀번호를 재입력해주세요.">
+            <div id="userpassword-message" class="mb-[20px]"></div>
+            <p class="text-2xl mb-[10px] font-bold">Nickname</p>
+            <input type="text" id="usernickname" class="h-10 w-[360px] rounded indent-3" placeholder="다른 사용자에게 보여지는 별명입니다.">
+            <div id="usernickname-message" class="mb-[20px]"></div>
+            <p class="text-2xl mb-[10px] font-bold">Name</p>
+            <input type="text" class="h-10 w-[360px] rounded mb-[30px] indent-3" placeholder="성함을 입력해주세요.">
+            <div class="flex justify-between mb-[20px]">
+                <button onclick="" class="text-xl bg-green-300 w-[170px] h-[50px] rounded-lg font-bold">가입완료</button>
+                <button onclick="" class="text-xl bg-gray-400 w-[170px] h-[50px] rounded-lg font-bold">취소</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

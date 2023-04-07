@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <title>Login</title>
+    <!-- jQuery 라이브러리 로드 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI 라이브러리 로드 -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class = "bg-black flex justify-center items-center h-screen">
+    <form id="login-form" class="bg-gray-300 w-[400px] h-[450px] mx-auto px-[20px] pt-5 rounded-lg shadow-lg" style="box-shadow: 0 10px 20px rgba(130, 130, 130, 0.3), /* 위 */
+    0 -10px 20px rgba(130, 130, 130, 0.3), /* 아래 */
+    -10px 0 20px rgba(130, 130, 130, 0.3), /* 왼쪽 */
+    10px 0 20px rgba(130, 130, 130, 0.3) /* 오른쪽 */">
+            <h1 class="text-center text-4xl font-bold mb-[20px]">LOGIN</h1>
+            <label for="id" class="text-xl mb-[10px] font-bold">ID</label>
+            <br/>
+            <input type="text" id="id" name="id" class="h-10 w-[360px] rounded mb-[20px] indent-3" placeholder="아이디를 입력해주세요." required>
+            <br/>
+            <label for="password" class="text-xl mb-[10px] font-bold">Password</label>
+            <br/>
+            <input type="password" id="password" name="password" required class="h-10 w-[360px] rounded mb-[50px] indent-3"
+            placeholder="비밀번호를 입력해주세요.">
+        <div>
+            <button type="submit" name="login" class="text-xl bg-green-400 w-[360px] h-[40px] rounded-lg font-bold flex justify-center items-center shadow-xl">로그인</button>
+            <br/>
+            <button type="button" name="signup" onclick="location.href='/signup'" class="text-xl bg-gray-400 w-[360px] h-[40px] rounded-lg font-bold flex justify-center items-cente lex justify-center items-center shadow-xl ">회원가입</button>
+        </div>
+    </form>
+  </body>
+  <div id="result"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <script>
+    
+    $(document).ready(function() {
+        $('#login-form').submit(function(event) {
+            event.preventDefault();
+            var id = $('#id').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/login',
+                data: {
+                    id: id,
+                    password: password
+                },
+                success: function(response) {
+                    if (response['result'] == 'success') {
+                        alert('로그인 성공!');
+                        var redirect_url = response['redirect'];
+                        localStorage.setItem('access_token', response['access_token']);
+                        window.location.href = redirect_url;
+                    } else {
+                        alert('로그인 실패!');
+                    }
+                },
+                error: function(data) {
+                    alert('서버 오류!');
+                }
+            });
+        });
+    });
+  </script> -->
+
+  <script>
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    $(document).ready(function() {
+        $('#login-form').submit(function(event) {
+            event.preventDefault();
+            var id = $('#id').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/login',
+                data: {
+                    id: id,
+                    password: password
+                },
+                success: function(response) {
+                    if (response['result'] == 'success') {
+                        alert('로그인 성공!');
+                        setCookie('access_token', response['access_token'], 1);
+                        window.location.href = response['redirect'];
+                    } else {
+                        alert('로그인 실패!');
+                    }
+                },
+                error: function(data) {
+                    alert('서버 오류!');
+                }
+            });
+        });
+    });
+</script>
+
+</html>

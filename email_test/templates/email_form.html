@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Email Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function sendEmail() {
+        const sender = $('#sender').val();
+        const recipient = $('#recipient').val();
+        const subject = $('#subject').val();
+        const message = $('#message').val();
+
+        $.ajax({
+          type: 'POST',
+          url: '/',
+          contentType: 'application/json;charset=UTF-8',
+          data: JSON.stringify({
+            sender: sender,
+            recipient: recipient,
+            subject: subject,
+            message: message
+          }),
+          success: function (response) {
+            alert('Email sent!');
+          },
+          error: function (xhr, status, error) {
+            alert('Email failed to send');
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <form action="/" method="POST">
+      <label for="sender">Sender:</label>
+      <input type="text" id="sender" name="sender" required><br><br>
+      <label for="recipient">Recipient:</label>
+      <input type="text" id="recipient" name="recipient" required><br><br>
+      <label for="subject">Subject:</label>
+      <input type="text" id="subject" name="subject" required><br><br>
+      <label for="message">Message2:</label>
+      <textarea id="message" name="message" required></textarea><br><br>
+      <input type="button" value="Send Email" onclick="sendEmail()">
+    </form>
+  </body>
+</html>
